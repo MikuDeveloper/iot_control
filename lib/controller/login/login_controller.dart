@@ -26,7 +26,9 @@ class _LoginControllerState extends State<LoginController> implements Loading {
     if (widget.formKey.currentState!.validate()) {
       turnOnLoading();
       auth.login(email: widget.emailController.text, password: widget.passwordController.text)
-        .then((value) => context.go('/home'))
+        .then((token) {
+          context.go('/home');
+        })
         .catchError((error, stackTrace) {
           Alerts.openErrorDialog(
               context,

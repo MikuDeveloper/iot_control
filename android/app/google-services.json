@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "662993512175",
+    "project_id": "iot-control-e9084",
+    "storage_bucket": "iot-control-e9084.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662993512175:android:6ab662658ebd10f63b5d1a",
+        "android_client_info": {
+          "package_name": "mx.tecnm.cdhidalgo.iot_control"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOAVlrdOX0_DT_EiA3pHzzsHrlC0sj3R4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

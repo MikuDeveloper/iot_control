@@ -7,13 +7,13 @@ class Preferences {
   Preferences._();
   static final Preferences instance = Preferences._();
 
-  Future<String?> _getToken() async {
+  Future<String?> getToken() async {
     final prefs = await getPreferences();
     return prefs.getString('token');
   }
 
   Future<bool> isExpiredToken() async {
-    final token = await _getToken();
+    final token = await getToken();
     if (token == null) return true;
 
     try {
@@ -24,7 +24,7 @@ class Preferences {
   }
 
   Future<TokenPayload?> getPayload() async {
-    final token = await _getToken();
+    final token = await getToken();
     if (token == null) return null;
     if (await isExpiredToken()) return null;
 

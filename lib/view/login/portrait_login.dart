@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iot_control/controller/login/login_controller.dart';
 import 'package:iot_control/view/modals/login_modal.dart';
 
 import '../../generated/assets.dart';

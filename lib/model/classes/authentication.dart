@@ -7,7 +7,7 @@ class Authentication {
 
   static final Authentication instance = Authentication._();
 
-  Future<void> login({required String email, required String password}) async {
+  Future<String> login({required String email, required String password}) async {
     final response = await http.post(
       Uri.https(apiUrl, 'auth/login'),
       body: { "email": email, "password": password }
@@ -16,6 +16,7 @@ class Authentication {
     if (response.body.contains('ey')) {
       final prefs = await getPreferences();
       prefs.setString('token', response.body);
+      return response.body;
     } else {
       throw Exception(response.body);
     }
@@ -23,6 +24,12 @@ class Authentication {
 
   Future<void> logout() async {
     final prefs = await getPreferences();
+    final token = await preferences.getToken();
+    final payload = await preferences.getPayload();
+
+    notifications.removeNotificationToken(token!, payload!.uuid!);
+
     prefs.remove('token');
+    prefs.remove('notificationtoken');
   }
 }
