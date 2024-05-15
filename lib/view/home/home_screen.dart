@@ -14,11 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    preferences.getToken().then((token) {
-      preferences.getPayload().then((payload) {
-        notifications.setNotificationToken(token!, payload!.uuid!);
-      });
-    });
+    auth.setMessagingToken();
   }
 
   @override
@@ -27,8 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(),
       body: const Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
             LogoutController(),
+            SizedBox(height: 40)
           ],
         ),
       ),

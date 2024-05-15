@@ -1,18 +1,12 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:iot_control/model/classes/notifications.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'model/classes/authentication.dart';
-import 'model/classes/preferences.dart';
+import 'model/api/auth.dart';
 
 const String apiUrl = 'iot-control-api.onrender.com';
+//const String apiUrl = '192.168.1.69:3000';
 
-Future<SharedPreferences> getPreferences () async => await SharedPreferences.getInstance();
-
-final preferences = Preferences.instance;
-final notifications = Notifications.instance;
-final auth = Authentication.instance;
+final auth = Auth.instance;
 
 final messaging = FirebaseMessaging.instance;
 final messageStreamController = BehaviorSubject<RemoteMessage>();

@@ -33,7 +33,7 @@ class _LoginControllerState extends State<LoginController> implements Loading {
           Alerts.openErrorDialog(
               context,
               'ERROR DE INICIO DE SESIÓN',
-              'Correo o contraseña incorrectos'
+              'Correo electrónico o contraseña incorrectos.'
           );
         }).whenComplete(() => turnOffLoading());
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iot_control/globals.dart';
 
+import '../globals.dart';
 import '../view/home/home_screen.dart';
 import '../view/login/login_screen.dart';
 
@@ -13,12 +13,11 @@ final routerConfig = GoRouter(
       path: '/login',
       builder: (context, state) => const LoginScreen(),
       redirect: (context, state) async {
-        return await preferences.isExpiredToken() ? '/login' : '/home';
+        return await auth.isExpiredToken() ? '/login' : '/home';
       }
     ),
     GoRoute(
       path: '/home',
-      //builder: (context, state) => const HomeScreen()
       pageBuilder: (context, state) => CustomTransitionPage(
         key: state.pageKey,
         transitionDuration: const Duration(milliseconds: 400),
@@ -38,6 +37,6 @@ final routerConfig = GoRouter(
     )
   ],
   redirect: (context, state) async {
-    return await preferences.isExpiredToken() ? '/login' : null;
+    return await auth.isExpiredToken() ? '/login' : null;
   }
 );
