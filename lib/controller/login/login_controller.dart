@@ -30,10 +30,14 @@ class _LoginControllerState extends State<LoginController> implements Loading {
           context.go('/home');
         })
         .catchError((error, stackTrace) {
+          var message = error.message['message'];
+          if (message.runtimeType == List) {
+            message = 'El correo electrónico proporcionado no es válido.';
+          }
           Alerts.openErrorDialog(
               context,
               'ERROR DE INICIO DE SESIÓN',
-              'Correo electrónico o contraseña incorrectos.'
+              message
           );
         }).whenComplete(() => turnOffLoading());
     }

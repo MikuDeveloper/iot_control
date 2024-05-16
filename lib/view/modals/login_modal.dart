@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iot_control/controller/login/login_controller.dart';
 import 'package:iot_control/controller/utils/validations.dart';
+import 'package:iot_control/generated/assets.dart';
 
 class LoginModal extends StatelessWidget {
   const LoginModal({super.key});
@@ -62,6 +63,8 @@ class _LoginFormState extends State<LoginForm> {
               fontSize: 20
             )
           ),
+          const Divider(),
+          Image.asset(Assets.iconsLogo2, height: 200),
           const SizedBox(height: 30),
           TextFormField(
             controller: _emailController,
@@ -92,8 +95,8 @@ class _LoginFormState extends State<LoginForm> {
                   });
                 },
                 icon: _obscureText ?
-                const Icon(Icons.visibility) :
-                const Icon(Icons.visibility_off)
+                const Icon(Icons.visibility_off) :
+                const Icon(Icons.visibility)
               )
             ),
           ),
@@ -102,7 +105,8 @@ class _LoginFormState extends State<LoginForm> {
             formKey: _formKey,
             emailController: _emailController,
             passwordController: _passwordController
-          )
+          ),
+          const SizedBox(height: 30)
         ],
       ),
     );

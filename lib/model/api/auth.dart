@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +27,7 @@ class Auth {
       _setPayload();
       return response.body;
     } else {
-      throw Exception(response.body);
+      throw Exception(jsonDecode(response.body));
     }
   }
 
@@ -88,7 +90,6 @@ class Auth {
 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       prefs.setString('messagingToken', messagingToken!);
-
     }
   }
 
