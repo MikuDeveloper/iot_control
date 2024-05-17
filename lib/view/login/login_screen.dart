@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iot_control/model/providers/operators_provider.dart';
+import 'package:iot_control/model/providers/trucks_provider.dart';
 
 import '../../model/providers/user_provider.dart';
 import 'landscape_login.dart';
@@ -16,9 +18,13 @@ class LoginScreen extends ConsumerWidget {
         builder: (context, constraints) {
           if (MediaQuery.of(context).orientation == Orientation.portrait) {
             ref.invalidate(userProvider);
+            ref.invalidate(trucksProvider);
+            ref.invalidate(operatorsProvider);
             return const PortraitLogin();
           } else {
             ref.invalidate(userProvider);
+            ref.invalidate(trucksProvider);
+            ref.invalidate(operatorsProvider);
             return const LandscapeLogin();
           }
         }

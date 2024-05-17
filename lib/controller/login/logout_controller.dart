@@ -20,7 +20,7 @@ class _LogoutControllerState extends State<LogoutController> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: _logout,
-      icon: const Icon(Icons.arrow_back)
+      icon: const Icon(Icons.logout)
     );
   }
 }

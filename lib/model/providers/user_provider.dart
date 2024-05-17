@@ -7,7 +7,7 @@ final userProvider = StateNotifierProvider<UserNotifierProvider, AsyncValue<User
 
 class UserNotifierProvider extends StateNotifier<AsyncValue<UserEntity>> {
   UserNotifierProvider() : super(const AsyncValue.loading()) {
-    loadData();
+    if (mounted) loadData();
   }
 
   Future<void> loadData() async {
