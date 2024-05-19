@@ -7,7 +7,7 @@ import 'package:iot_control/model/entities/user_entity.dart';
 final operatorsProvider = StateNotifierProvider<OperatorsNotifierProvider, AsyncValue<List<UserEntity>>>((ref) => OperatorsNotifierProvider());
 
 class OperatorsNotifierProvider extends StateNotifier<AsyncValue<List<UserEntity>>> {
-  List operatorsList = [];
+  List<UserEntity> operatorsList = [];
 
   OperatorsNotifierProvider() : super(const AsyncValue.loading()) {
     if (mounted) loadOperators();

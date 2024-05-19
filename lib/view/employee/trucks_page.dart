@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:iot_control/model/entities/truck.dart';
-import 'package:iot_control/model/providers/trucks_provider.dart';
-import 'package:iot_control/view/shared/loading_widget.dart';
+
+import '../../model/entities/truck.dart';
+import '../../model/entities/user_entity.dart';
+import '../../model/providers/operators_provider.dart';
+import '../../model/providers/trucks_provider.dart';
+import '../shared/loading_widget.dart';
+
 
 class TrucksPage extends ConsumerWidget {
   const TrucksPage({super.key});
@@ -11,7 +15,14 @@ class TrucksPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(trucksProvider);
     return provider.when(
-      data: (trucks) => TrucksDataPage(trucks: trucks),
+      data: (trucks) {
+        final provider2 = ref.watch(operatorsProvider);
+        return provider2.when(
+          data: (operators) => TrucksDataPage(trucks: trucks, operators: operators),
+          error: (error, stackTrace) => const TrucksErrorPage(),
+          loading: () => const LoadingWidget(title: 'Obteniendo datos de operadores...')
+        );
+      },
       error: (error, stackTrace) => const TrucksErrorPage(),
       loading: () => const LoadingWidget(title: 'Obteniendo datos de camiones...')
     );
@@ -20,7 +31,8 @@ class TrucksPage extends ConsumerWidget {
 
 class TrucksDataPage extends ConsumerWidget {
   final List<Truck> trucks;
-  const TrucksDataPage({super.key, required this.trucks});
+  final List<UserEntity> operators;
+  const TrucksDataPage({super.key, required this.trucks, required this.operators});
 
   Color setColorCard(String status) {
     switch (status) {
@@ -39,19 +51,26 @@ class TrucksDataPage extends ConsumerWidget {
         itemCount: trucks.length,
         itemBuilder: (context, index) {
           final id = trucks[index].id;
-          final operator = trucks[index].operator;
+          final uuid = trucks[index].operator;
           final location = trucks[index].location;
           final status = trucks[index].status;
+          final operator = operators.firstWhere((item) => item.uuid == uuid);
+          final firstname = operator.firstname ?? '';
+          final lastname1 = operator.lastname1 ?? '';
+          final lastname2 = operator.lastname2 ?? '';
+          final name = '$firstname $lastname1 $lastname2'.trim();
+
           return Card(
-            color: setColorCard(status!),
+            //color: setColorCard(status!),
             child: ListTile(
-              title: Text('Camión: $id'),
+              title: Text('Camión: $id', style: const TextStyle(fontWeight: FontWeight.w700)),
               subtitle: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Operador: $operator'),
-                  Text('Ubicación: $location'),
+                  Text('Operador: $name'),
+                  Text('Ubicación: ${location?.latitude}, ${location?.longitude}'),
                   Text('Estado: $status'),
                 ],
               ),
