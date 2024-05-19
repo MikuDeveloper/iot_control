@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iot_control/model/providers/operators_provider.dart';
 
 import '../../model/entities/user_entity.dart';
+import '../shared/loading_widget.dart';
 
 class OperatorsPage extends ConsumerWidget {
   const OperatorsPage({super.key});
@@ -13,7 +14,7 @@ class OperatorsPage extends ConsumerWidget {
     return provider.when(
       data: (operators) => OperatorsDataPage(operators: operators),
       error: (error, stackTrace) => const OperatorsErrorPage(),
-      loading: () => const OperatorsLoadingPage()
+      loading: () => const LoadingWidget(title: 'Cargando operadores...')
     );
   }
 }
@@ -32,7 +33,7 @@ class OperatorsDataPage extends ConsumerWidget {
         itemBuilder: (BuildContext context, int index) {
           final firstname = operators[index].firstname ?? '';
           final lastname1 = operators[index].lastname1 ?? '';
-          final lastname2 = operators[index].lastname1 ?? '';
+          final lastname2 = operators[index].lastname2 ?? '';
           final name = '$firstname $lastname1 $lastname2'.trim();
           return Card(
             child: ListTile(
@@ -68,23 +69,3 @@ class OperatorsErrorPage extends ConsumerWidget {
     );
   }
 }
-
-class OperatorsLoadingPage extends StatelessWidget {
-  const OperatorsLoadingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Cargando operadores...', style: TextStyle(fontSize: 20)),
-          SizedBox(height: 20),
-          CircularProgressIndicator()
-        ],
-      ),
-    );
-  }
-}
-

@@ -36,11 +36,14 @@ class Truck {
     _location = json['location'];
     _status = json['status'];
   }
-  Truck copyWith({  String? id,
+
+  Truck copyWith({
+    String? id,
     String? operator,
     String? location,
     String? status,
-  }) => Truck(  id: id ?? _id,
+  }) => Truck(
+    id: id ?? _id,
     operator: operator ?? _operator,
     location: location ?? _location,
     status: status ?? _status,
