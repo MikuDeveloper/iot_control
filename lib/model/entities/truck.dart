@@ -1,4 +1,6 @@
 import 'dart:convert';
+
+import 'location.dart';
 /// id : ""
 /// operator : ""
 /// location : ""
@@ -33,7 +35,7 @@ class Truck {
   Truck.fromJson(dynamic json) {
     _id = json['id'];
     _operator = json['operator'];
-    _location = Location.fromJson(json['location']);
+    _location = json['location'] != null ? Location.fromJson(json['location']) : null;
     _status = json['status'];
   }
 
@@ -59,7 +61,7 @@ class Truck {
   }
 }
 
-Location locationFromJson(String str) => Location.fromJson(json.decode(str));
+/*Location locationFromJson(String str) => Location.fromJson(json.decode(str));
 String locationToJson(Location data) => json.encode(data.toJson());
 
 class Location {
@@ -91,4 +93,4 @@ class Location {
     map['longitude'] = _longitude;
     return map;
   }
-}
+}*/

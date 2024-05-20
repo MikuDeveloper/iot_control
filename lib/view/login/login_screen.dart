@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iot_control/model/providers/clients_provider.dart';
+import 'package:iot_control/model/providers/deliveries_provider.dart';
 import 'package:iot_control/model/providers/operators_provider.dart';
 import 'package:iot_control/model/providers/trucks_provider.dart';
 
@@ -20,11 +22,15 @@ class LoginScreen extends ConsumerWidget {
             ref.invalidate(userProvider);
             ref.invalidate(trucksProvider);
             ref.invalidate(operatorsProvider);
+            ref.invalidate(deliveriesPendingProvider);
+            ref.invalidate(clientsProvider);
             return const PortraitLogin();
           } else {
             ref.invalidate(userProvider);
             ref.invalidate(trucksProvider);
             ref.invalidate(operatorsProvider);
+            ref.invalidate(deliveriesPendingProvider);
+            ref.invalidate(clientsProvider);
             return const LandscapeLogin();
           }
         }

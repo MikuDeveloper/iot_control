@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iot_control/view/employee/deliveries_page.dart';
 import 'package:iot_control/view/employee/operators_page.dart';
 import 'package:iot_control/view/employee/trucks_page.dart';
 
@@ -31,7 +32,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
         actionsIconTheme: const IconThemeData(color: Colors.white),
       ),
       body: <Widget> [
-        const Center(child: Text('Envíos')),
+        const DeliveriesPage(),
         const TrucksPage(),
         const OperatorsPage(),
       ][currentIndex],
