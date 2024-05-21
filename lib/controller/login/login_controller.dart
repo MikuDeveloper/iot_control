@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iot_control/controller/utils/alerts.dart';
-import 'package:iot_control/controller/utils/interfaces.dart';
 
 import '../../globals.dart';
+import '../utils/alerts.dart';
+import '../utils/interfaces.dart';
 
 class LoginController extends StatefulWidget {
   final GlobalKey<FormState> formKey;

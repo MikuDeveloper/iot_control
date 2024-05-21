@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:iot_control/model/entities/truck.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,7 @@ class Auth {
 
   late Payload payload = Payload();
   late String token = '';
+  late Truck truck = Truck();
   late String? messagingToken;
 
   Future<String> login({required String email, required String password}) async {
@@ -37,6 +39,7 @@ class Auth {
     prefs.remove('messagingToken');
     token = '';
     payload = Payload();
+    truck = Truck();
   }
 
   Future<String?> _getToken() async {

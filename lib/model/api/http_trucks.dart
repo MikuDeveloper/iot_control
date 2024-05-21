@@ -21,4 +21,17 @@ class HttpTrucks {
     }
   }
 
+  Future<String> getTruckByOperator(String operator) async {
+    final response = await http.get(
+        Uri.https( apiUrl, 'truck/operator/$operator' ),
+        headers: { 'Authorization': 'Bearer ${auth.token}' }
+    );
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      return response.body;
+    } else {
+      throw Exception(jsonDecode(response.body));
+    }
+  }
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iot_control/view/operator/operator_deliveries.dart';
 
 import '../../controller/login/logout_controller.dart';
 
@@ -13,9 +14,7 @@ class OperatorHomeScreen extends StatelessWidget {
           LogoutController()
         ],
       ),
-      body: const Center(
-        child: Text('Pantalla del operador.'),
-      ),
+      body: const OperatorDeliveries()
     );
   }
 }

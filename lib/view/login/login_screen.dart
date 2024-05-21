@@ -21,14 +21,18 @@ class LoginScreen extends ConsumerWidget {
           if (MediaQuery.of(context).orientation == Orientation.portrait) {
             ref.invalidate(userProvider);
             ref.invalidate(trucksProvider);
+            ref.invalidate(truckByOperatorProvider);
             ref.invalidate(operatorsProvider);
+            ref.invalidate(operatorDeliveriesProvider);
             ref.invalidate(deliveriesPendingProvider);
             ref.invalidate(clientsProvider);
             return const PortraitLogin();
           } else {
             ref.invalidate(userProvider);
             ref.invalidate(trucksProvider);
+            ref.invalidate(truckByOperatorProvider);
             ref.invalidate(operatorsProvider);
+            ref.invalidate(operatorDeliveriesProvider);
             ref.invalidate(deliveriesPendingProvider);
             ref.invalidate(clientsProvider);
             return const LandscapeLogin();
