@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iot_control/view/shared/delivery_details_screen.dart';
 
 import '../globals.dart';
 import '../model/entities/client.dart';
 import '../model/entities/delivery.dart';
-import '../view/employee/map_screen.dart';
+import '../view/shared/map_screen.dart';
 import '../view/home/home_screen.dart';
 import '../view/login/login_screen.dart';
 
@@ -23,12 +24,7 @@ final routerConfig = GoRouter(
       path: '/home',
       pageBuilder: (context, state) => CustomTransitionPage(
         key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 400),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          /*FadeTransition(
-            opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
-            child: child,
-          ),*/
           SlideTransition(
             position: animation.drive(
                 Tween(begin: const Offset(1,0), end: Offset.zero)),
@@ -36,32 +32,53 @@ final routerConfig = GoRouter(
           ),
           //ScaleTransition(scale: animation, child: child),
         child: const HomeScreen()
-      )
-    ),
-    GoRoute(
-      path: '/map',
-      pageBuilder: (context, state) {
-        final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
-        final delivery = extra['delivery'] as Delivery;
-        final client = extra['client'] as Client;
+      ),
+      routes: [
+        GoRoute(
+          path: 'delivery/details',
+          pageBuilder: (context, state) {
+            final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
+            final delivery = extra['delivery'] as Delivery;
+            final client = extra['client'] as Client;
 
-        return CustomTransitionPage(
-          key: state.pageKey,
-          transitionDuration: const Duration(milliseconds: 400),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            FadeTransition(
-              opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
-              child: child
-            ),
-          child: MapScreen(delivery: delivery, client: client)
-        );
-      },
-      /*builder: (context, state) {
-        final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
-        final delivery = extra['delivery'] as Delivery;
-        final client = extra['client'] as Client;
-        return MapScreen(delivery: delivery, client: client);
-      }*/
+            return CustomTransitionPage(
+              key: state.pageKey,
+              transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                SlideTransition(
+                  position: animation.drive(
+                      Tween(begin: const Offset(0,1), end: Offset.zero)),
+                  child: child,
+                ),
+              child: DeliveryDetailsScreen(delivery: delivery, client: client)
+            );
+          }
+        ),
+        GoRoute(
+          path: 'delivery/map',
+          pageBuilder: (context, state) {
+            final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
+            final delivery = extra['delivery'] as Delivery;
+            final client = extra['client'] as Client;
+
+            return CustomTransitionPage(
+                key: state.pageKey,
+                transitionDuration: const Duration(milliseconds: 400),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                    FadeTransition(
+                        opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                        child: child
+                    ),
+                child: MapScreen(delivery: delivery, client: client)
+            );
+          },
+              /*builder: (context, state) {
+            final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
+            final delivery = extra['delivery'] as Delivery;
+            final client = extra['client'] as Client;
+            return MapScreen(delivery: delivery, client: client);
+          }*/
+        ),
+      ]
     ),
   ],
   redirect: (context, state) async {

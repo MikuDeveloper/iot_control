@@ -10,9 +10,13 @@ class OperatorHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Pedidos asignados'),
         actions: const [
           LogoutController()
         ],
+        backgroundColor: Colors.blue,
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 21),
+        actionsIconTheme: const IconThemeData(color: Colors.white),
       ),
       body: const OperatorDeliveries()
     );

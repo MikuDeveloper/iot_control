@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iot_control/globals.dart';
-import 'package:iot_control/model/providers/deliveries_provider.dart';
 
+import '../../globals.dart';
 import '../../model/entities/client.dart';
 import '../../model/entities/delivery.dart';
 import '../../model/providers/clients_provider.dart';
+import '../../model/providers/deliveries_provider.dart';
 import '../../model/providers/trucks_provider.dart';
 import '../shared/loading_widget.dart';
 
@@ -62,24 +62,31 @@ class OperatorDeliveriesData extends ConsumerWidget {
           return Card(
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
-              title: Text('${client.nickname}'),
+              title: Text('${client.nickname}', style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${client.address}'),
-                  Text('${client.contact}'),
+                  Text('Dirección: ${client.address}'),
+                  Text('Contacto: ${client.contact}')
                 ],
               ),
               trailing: IconButton(
                 onPressed: () {
                   context.push(
-                    '/map',
+                    '/home/delivery/map',
                     extra: { 'delivery': deliveries[index], 'client': client },
                   );
                 },
                 icon: const Icon(Icons.location_on)
               ),
+              onTap: () {
+                context.push(
+                  '/home/delivery/details',
+                  extra: { 'delivery': deliveries[index], 'client': client }
+                );
+              }
             ),
           );
         },
@@ -110,4 +117,3 @@ class OperatorDeliveriesError extends ConsumerWidget {
     );
   }
 }
-

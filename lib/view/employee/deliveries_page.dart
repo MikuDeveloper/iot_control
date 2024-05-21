@@ -51,7 +51,7 @@ class DeliveriesDataPage extends ConsumerWidget {
               trailing: IconButton(
                 onPressed: () {
                   context.push(
-                    '/map',
+                    '/home/delivery/map',
                     extra: { 'delivery': deliveries[index], 'client': client },
                   );
                 },
