@@ -53,7 +53,7 @@ class DeliveriesDataPage extends ConsumerWidget {
                 onPressed: () {
                   auth.truck = auth.truck.copyWith(id: deliveries[index].truck);
                   context.push(
-                    '/home/delivery/map',
+                    '/home/employee/delivery/map',
                     extra: { 'delivery': deliveries[index], 'client': client },
                   );
                 },

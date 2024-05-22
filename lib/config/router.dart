@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iot_control/view/employee/employee_map.dart';
+import 'package:iot_control/view/operator/operator_map.dart';
 import 'package:iot_control/view/shared/delivery_details_screen.dart';
 
 import '../globals.dart';
 import '../model/entities/client.dart';
 import '../model/entities/delivery.dart';
-import '../view/shared/map_screen.dart';
 import '../view/home/home_screen.dart';
 import '../view/login/login_screen.dart';
 
@@ -54,13 +55,32 @@ final routerConfig = GoRouter(
           }
         ),
         GoRoute(
-          path: 'delivery/map',
+          path: 'operator/delivery/map',
           pageBuilder: (context, state) {
             final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
             final delivery = extra['delivery'] as Delivery;
             final client = extra['client'] as Client;
 
             return CustomTransitionPage(
+              key: state.pageKey,
+              transitionDuration: const Duration(milliseconds: 400),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(
+                    opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                    child: child
+                ),
+              child: OperatorMap(delivery: delivery, client: client)
+            );
+          }
+        ),
+        GoRoute(
+            path: 'employee/delivery/map',
+            pageBuilder: (context, state) {
+              final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
+              final delivery = extra['delivery'] as Delivery;
+              final client = extra['client'] as Client;
+
+              return CustomTransitionPage(
                 key: state.pageKey,
                 transitionDuration: const Duration(milliseconds: 400),
                 transitionsBuilder: (context, animation, secondaryAnimation, child) =>
@@ -68,15 +88,9 @@ final routerConfig = GoRouter(
                         opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
                         child: child
                     ),
-                child: MapScreen(delivery: delivery, client: client)
-            );
-          },
-              /*builder: (context, state) {
-            final Map<String, dynamic> extra = state.extra! as Map<String, dynamic>;
-            final delivery = extra['delivery'] as Delivery;
-            final client = extra['client'] as Client;
-            return MapScreen(delivery: delivery, client: client);
-          }*/
+                child: EmployeeMap(delivery: delivery, client: client)
+              );
+            }
         ),
       ]
     ),
