@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iot_control/globals.dart';
 import 'package:iot_control/model/providers/clients_provider.dart';
 
 import '../../model/entities/client.dart';
@@ -50,6 +51,7 @@ class DeliveriesDataPage extends ConsumerWidget {
               subtitle: Text('${client.address}'),
               trailing: IconButton(
                 onPressed: () {
+                  auth.truck = auth.truck.copyWith(id: deliveries[index].truck);
                   context.push(
                     '/home/delivery/map',
                     extra: { 'delivery': deliveries[index], 'client': client },
