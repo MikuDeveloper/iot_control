@@ -44,6 +44,10 @@ dependencies:
   firebase_messaging: ^14.9.1
   rxdart: ^0.27.7
   url_launcher: ^6.2.6
+  google_maps_flutter: ^2.6.1
+  google_maps_flutter_web: ^0.5.7
+  workmanager: ^0.5.2
+  geolocator: ^12.0.0
 
 dev_dependencies:
   flutter_test:
