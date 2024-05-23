@@ -75,7 +75,7 @@ class OperatorDeliveriesData extends ConsumerWidget {
               trailing: IconButton(
                 onPressed: () {
                   context.push(
-                    '/home/delivery/map',
+                    '/home/operator/delivery/map',
                     extra: { 'delivery': deliveries[index], 'client': client },
                   );
                 },

@@ -38,7 +38,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
               trailing: IconButton(
                 onPressed: () {
                   context.push(
-                    '/home/delivery/map',
+                    '/home/operator/delivery/map',
                     extra: { 'delivery': delivery, 'client': client },
                   );
                 },
