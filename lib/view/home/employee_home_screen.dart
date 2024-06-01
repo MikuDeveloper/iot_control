@@ -63,30 +63,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
         ]
       ),
       floatingActionButton: [
-        FloatingActionButton.extended(
-          onPressed: () {
-
-          },
-          tooltip: 'Nuevo pedido',
-          label: const Text('Nuevo pedido'),
-          icon: const Icon(Icons.add_rounded),
-        ),
-        FloatingActionButton.extended(
-          onPressed: () {
-
-          },
-          tooltip: 'Registrar camión',
-          label: const Text('Registrar camión'),
-          icon: const Icon(Icons.car_rental_rounded),
-        ),
-        FloatingActionButton.extended(
-          onPressed: () {
-
-          },
-          tooltip: 'Registrar operador',
-          label: const Text('Registrar operador'),
-          icon: const Icon(Icons.person_add_alt_rounded),
-        ),
+        null,null,null
       ][currentIndex],
     );
   }
