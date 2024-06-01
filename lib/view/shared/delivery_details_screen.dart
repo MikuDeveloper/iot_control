@@ -28,7 +28,7 @@ class DeliveryDetailsScreen extends StatelessWidget {
           const SizedBox(height: 15),
 
           const Text('Materiales:', style: TextStyle(fontWeight: FontWeight.bold)),
-          Card(child: ListTile(title: Text('${client.nickname}'))),
+          Card(child: ListTile(title: Text('${delivery.materials?.first.name}'))),
           const SizedBox(height: 15),
 
           const Text('Dirección:', style: TextStyle(fontWeight: FontWeight.bold)),
